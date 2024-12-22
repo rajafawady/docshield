@@ -27,7 +27,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
       try {
         final user = await _authService.signIn(
-          _emailController.text,
+          _emailController.text.trim(),
           _passwordController.text,
         );
 
@@ -37,9 +37,13 @@ class _AuthScreenState extends State<AuthScreen> {
             builder: (context) => HomeScreen(user: user),
           ),
         );
+      } on AuthException catch (e) {
+        setState(() {
+          _errorMessage = e.message;
+        });
       } catch (e) {
         setState(() {
-          _errorMessage = e.toString();
+          _errorMessage = 'An unexpected error occurred. Please try again.';
         });
       } finally {
         setState(() {
@@ -47,6 +51,13 @@ class _AuthScreenState extends State<AuthScreen> {
         });
       }
     }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -63,6 +74,7 @@ class _AuthScreenState extends State<AuthScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Card(
+                  elevation: 4,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
