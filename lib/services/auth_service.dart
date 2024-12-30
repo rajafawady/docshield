@@ -17,6 +17,24 @@ class AuthService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final CryptoService _cryptoService = CryptoService();
 
+  Future<UserModel> signUp(String email, String password) async {
+    print('signing up with $email and $password');
+    try {
+      final userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      final user = await _getOrCreateUser(userCredential.user!);
+      return user;
+    } on FirebaseAuthException catch (e) {
+      print('FirebaseAuthException: ${e.code}, ${e.message}');
+      throw AuthException(e.message ?? 'Sign up failed');
+    } catch (e) {
+      print('Unexpected error: $e');
+      throw AuthException('Unexpected error: $e');
+    }
+  }
+
   Future<UserModel> signIn(String email, String password) async {
     print('signing in with $email and $password');
     try {

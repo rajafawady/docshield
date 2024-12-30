@@ -17,6 +17,7 @@ class AuthScreenState extends State<AuthScreen>
   final _passwordController = TextEditingController();
   final _authService = AuthService();
   bool _isLoading = false;
+  bool _isSignUp = false; // Toggle between sign-in and sign-up modes
   String _errorMessage = '';
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -35,7 +36,7 @@ class AuthScreenState extends State<AuthScreen>
     _animationController.forward();
   }
 
-  Future<void> _signIn() async {
+  Future<void> _authenticate() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
@@ -43,10 +44,15 @@ class AuthScreenState extends State<AuthScreen>
       });
 
       try {
-        final user = await _authService.signIn(
-          _emailController.text.trim(),
-          _passwordController.text,
-        );
+        final user = _isSignUp
+            ? await _authService.signUp(
+                _emailController.text.trim(),
+                _passwordController.text,
+              )
+            : await _authService.signIn(
+                _emailController.text.trim(),
+                _passwordController.text,
+              );
 
         if (!mounted) return;
         Navigator.pushReplacement(
@@ -159,9 +165,11 @@ class AuthScreenState extends State<AuthScreen>
                             const CircularProgressIndicator()
                           else
                             ElevatedButton.icon(
-                              onPressed: _signIn,
-                              icon: const Icon(Icons.login),
-                              label: const Text('Sign In'),
+                              onPressed: _authenticate,
+                              icon: Icon(_isSignUp
+                                  ? Icons.app_registration
+                                  : Icons.login),
+                              label: Text(_isSignUp ? 'Sign Up' : 'Sign In'),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.blueAccent,
                                 foregroundColor: Colors.white,
@@ -180,6 +188,19 @@ class AuthScreenState extends State<AuthScreen>
                                 textAlign: TextAlign.center,
                               ),
                             ),
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                _isSignUp = !_isSignUp;
+                              });
+                            },
+                            child: Text(
+                              _isSignUp
+                                  ? 'Already have an account? Sign In'
+                                  : 'Don\'t have an account? Sign Up',
+                              style: const TextStyle(color: Colors.blueAccent),
+                            ),
+                          ),
                         ],
                       ),
                     ),
