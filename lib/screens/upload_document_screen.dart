@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:crypto/crypto.dart';
 import 'package:file_picker/file_picker.dart';
 import '../models/user_model.dart';
 import '../services/document_service.dart';
@@ -56,12 +55,6 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
     }
   }
 
-  String _calculateFileHash(File file) {
-    final bytes = file.readAsBytesSync();
-    final hash = sha256.convert(bytes);
-    return hash.toString();
-  }
-
   Future<void> _uploadDocument() async {
     if (!_formKey.currentState!.validate() || _selectedFile == null) return;
 
@@ -72,12 +65,9 @@ class _UploadDocumentScreenState extends State<UploadDocumentScreen> {
     });
 
     try {
-      final fileHash = _calculateFileHash(_selectedFile!);
-
       await _documentService.uploadDocument(
-        filePath: _selectedFile!.path,
+        file: _selectedFile!,
         fileName: _nameController.text,
-        documentHash: fileHash,
         ownerId: widget.user.id,
       );
 

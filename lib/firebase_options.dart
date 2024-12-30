@@ -42,17 +42,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyC1qvg0Sa71HYRIxbFDonKg7gw207lbxy0',
-    appId: '1:383342764470:web:c73ac49ca9eb5f47096117',
+    appId: '1:383342764470:web:b7b40f26399ea943096117',
     messagingSenderId: '383342764470',
     projectId: 'docshield-86949',
     authDomain: 'docshield-86949.firebaseapp.com',
     storageBucket: 'docshield-86949.firebasestorage.app',
-    measurementId: 'G-54WRSLNDS5',
+    measurementId: 'G-CKTDHT2LLR',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBmSn5nosYUSFdCHHbp6IYIO91byYZaa0A',
-    appId: '1:383342764470:android:ea6bae7291825801096117',
+    appId: '1:383342764470:android:a0e4b8d7a7543a0f096117',
     messagingSenderId: '383342764470',
     projectId: 'docshield-86949',
     storageBucket: 'docshield-86949.firebasestorage.app',
@@ -60,7 +60,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCCKXjGL-yc4pTqX_ptJrg1vf-Wz4leSQU',
-    appId: '1:383342764470:ios:61822c1254c22167096117',
+    appId: '1:383342764470:ios:1a3e51bff1126321096117',
     messagingSenderId: '383342764470',
     projectId: 'docshield-86949',
     storageBucket: 'docshield-86949.firebasestorage.app',
@@ -69,7 +69,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCCKXjGL-yc4pTqX_ptJrg1vf-Wz4leSQU',
-    appId: '1:383342764470:ios:61822c1254c22167096117',
+    appId: '1:383342764470:ios:1a3e51bff1126321096117',
     messagingSenderId: '383342764470',
     projectId: 'docshield-86949',
     storageBucket: 'docshield-86949.firebasestorage.app',
@@ -78,11 +78,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyC1qvg0Sa71HYRIxbFDonKg7gw207lbxy0',
-    appId: '1:383342764470:web:1a1b2689004d17e7096117',
+    appId: '1:383342764470:web:7d4449c7fe2b4be2096117',
     messagingSenderId: '383342764470',
     projectId: 'docshield-86949',
     authDomain: 'docshield-86949.firebaseapp.com',
     storageBucket: 'docshield-86949.firebasestorage.app',
-    measurementId: 'G-WBD7L18PLY',
+    measurementId: 'G-HKQZS2VC26',
   );
 }

@@ -18,13 +18,12 @@ class AuthService {
   final CryptoService _cryptoService = CryptoService();
 
   Future<UserModel> signIn(String email, String password) async {
-    print('signing in');
+    print('signing in with $email and $password');
     try {
       final userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      print('userCredential: ${userCredential.user?.uid}');
       final user = await _getOrCreateUser(userCredential.user!);
       return user;
     } on FirebaseAuthException catch (e) {
@@ -42,26 +41,52 @@ class AuthService {
     print('userDoc: $userDoc');
     if (!userDoc.exists) {
       final keyPair = await _cryptoService.generateKeyPair();
-      print('keypair: $keyPair');
+      print('*****PVT KEY******: ${keyPair.privateKey.toString()}');
       final user = UserModel(
         id: firebaseUser.uid,
         email: firebaseUser.email!,
         publicKey: _cryptoService.encodePublicKey(keyPair.publicKey),
-        createdAt: DateTime.now(),
+        createdAt: DateTime.now().toString(),
         roles: ['user'],
       );
-      print("user: $user");
       await _firestore.collection('users').doc(user.id).set(user.toJson());
-      print('firestore success!');
       // Store private key securely
       await _cryptoService.storePrivateKey(
         userId: user.id,
         privateKey: keyPair.privateKey,
       );
-      print('private key stored!');
       return user;
     }
 
     return UserModel.fromJson(userDoc.data()!);
+  }
+
+  Stream<List<UserModel>> getAllUsers() {
+    try {
+      final users = _firestore.collection('users').snapshots().map((snapshot) {
+        return snapshot.docs.map((doc) {
+          return UserModel.fromJson(doc.data());
+        }).toList();
+      });
+      return users;
+    } catch (e) {
+      print('Error fetching users: $e');
+      throw AuthException('Error fetching users: $e');
+    }
+  }
+
+  Future<String> getUserEmailById(String userId) async {
+    try {
+      final userDoc = await _firestore.collection('users').doc(userId).get();
+      if (userDoc.exists) {
+        final user = UserModel.fromJson(userDoc.data()!);
+        return user.email;
+      } else {
+        throw AuthException('User not found');
+      }
+    } catch (e) {
+      print('Error fetching user email: $e');
+      throw AuthException('Error fetching user email: $e');
+    }
   }
 }

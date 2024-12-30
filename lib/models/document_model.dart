@@ -1,5 +1,4 @@
 import '../widgets/document_activity.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DocumentModel {
   final String id;
@@ -7,7 +6,7 @@ class DocumentModel {
   final String ownerId;
   final String documentHash;
   final Map<String, DocumentSignature> signatures;
-  final DateTime createdAt;
+  final String createdAt;
   final String status;
   final List<String> sharedWith;
   final String documentUrl;
@@ -39,7 +38,7 @@ class DocumentModel {
             ),
           ) ??
           {},
-      createdAt: (json['createdAt'] as Timestamp).toDate(),
+      createdAt: json['createdAt'],
       status: json['status'],
       sharedWith: List<String>.from(json['sharedWith']),
       documentUrl: json['documentUrl'],
@@ -69,7 +68,7 @@ class DocumentModel {
 class DocumentSignature {
   final String userId;
   final String signature;
-  final DateTime timestamp;
+  final String timestamp;
   final String publicKeyUsed;
 
   DocumentSignature({
@@ -80,10 +79,12 @@ class DocumentSignature {
   });
 
   factory DocumentSignature.fromJson(Map<String, dynamic> json) {
+    var timestampValue = json['timestamp'];
+
     return DocumentSignature(
       userId: json['userId'],
       signature: json['signature'],
-      timestamp: (json['timestamp'] as Timestamp).toDate(),
+      timestamp: timestampValue.toString(),
       publicKeyUsed: json['publicKeyUsed'],
     );
   }

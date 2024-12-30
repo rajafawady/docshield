@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class UserModel {
   final String id;
   final String email;
   final String publicKey;
-  final DateTime createdAt;
+  final String createdAt;
   final List<String> roles;
 
   UserModel({
@@ -20,7 +18,7 @@ class UserModel {
       id: json['id'],
       email: json['email'],
       publicKey: json['publicKey'],
-      createdAt: (json['createdAt'] as Timestamp).toDate(),
+      createdAt: json['createdAt'],
       roles: List<String>.from(json['roles']),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../models/document_model.dart';
 
 class DocumentCard extends StatelessWidget {
@@ -31,7 +30,7 @@ class DocumentCard extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(
-              'Created: ${DateFormat.yMMMd().format(document.createdAt)}',
+              'Created: ${document.createdAt}',
             ),
             trailing: _buildStatusChip(document.status),
           ),

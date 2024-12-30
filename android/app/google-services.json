@@ -7,26 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:383342764470:android:03e82b6a094c3d22096117",
-        "android_client_info": {
-          "package_name": "com.docshield.app"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBmSn5nosYUSFdCHHbp6IYIO91byYZaa0A"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:383342764470:android:ea6bae7291825801096117",
+        "mobilesdk_app_id": "1:383342764470:android:a0e4b8d7a7543a0f096117",
         "android_client_info": {
           "package_name": "com.example.docshield"
         }

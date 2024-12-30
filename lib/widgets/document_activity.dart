@@ -1,6 +1,6 @@
 class DocumentActivity {
   final String action;
-  final DateTime timestamp;
+  final String timestamp;
 
   DocumentActivity({
     required this.action,
@@ -10,7 +10,7 @@ class DocumentActivity {
   factory DocumentActivity.fromJson(Map<String, dynamic> json) {
     return DocumentActivity(
       action: json['action'],
-      timestamp: DateTime.parse(json['timestamp']),
+      timestamp: json['timestamp'].toString(),
     );
   }
 
