@@ -1,4 +1,4 @@
-# Document Security and Verification App
+# DocShield Flutter App
 
 This application is designed to manage, share, and verify the integrity of documents. It ensures that documents remain untampered and validates the authenticity of digital signatures, providing robust security for sensitive files.
 
@@ -16,7 +16,7 @@ This application is designed to manage, share, and verify the integrity of docum
 ## Technology Stack
 
 - **Frontend**: Flutter (Dart)
-- **Backend Services**: Custom APIs for document and user management
+- **Backend Services**: Flutter Firestore and Authentication
 - **Cryptography**: RSA for signing and verifying, SHA-256 for hashing
 - **Cloud Storage**: Dropbox API for file storage and retrieval
 
@@ -131,10 +131,10 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 For questions or support, please contact:
 
-- **Email**: your-email@example.com
-- **GitHub**: [your-username](https://github.com/your-username)
+- **Email**: rajafawady@gmail.com
+- **GitHub**: [your-username](https://github.com/rajafawady)
 
 ---
 
-Thank you for using the Document Security and Verification App!
+Thank you for using the DocShield App!
 
